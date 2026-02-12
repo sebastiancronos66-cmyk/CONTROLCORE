@@ -2165,3 +2165,126 @@ a {
     var(--shadow-elevated),
     0 0 65px -4px hsla(348, 35%, 42%, 0.7);
 }
+
+/* ============================================
+   INSTRUCTOR SECTION – PREMIUM MOBILE FIRST
+   ============================================ */
+
+/* ----- GRID STRUCTURE ----- */
+
+.instructor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .instructor-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+  }
+}
+
+/* ----- IMAGE CONTAINER ----- */
+
+.instructor-image-wrapper {
+  position: relative;
+}
+
+.instructor-image-container {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -20px rgba(0,0,0,0.35);
+}
+
+.instructor-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Hover solo desktop */
+@media (hover: hover) {
+  .instructor-image-container:hover .instructor-image {
+    transform: scale(1.03);
+  }
+}
+
+/* ----- IMAGE OVERLAY ----- */
+
+.instructor-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05),
+    rgba(0,0,0,0.25)
+  );
+  pointer-events: none;
+}
+
+/* ----- STATS CARD ----- */
+
+.instructor-stats-card {
+  position: absolute;
+  bottom: -1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.25);
+  z-index: 5;
+}
+
+.stats-icon {
+  width: 42px;
+  height: 42px;
+  background: hsl(348, 35%, 42%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.stats-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.stats-label {
+  font-size: 0.85rem;
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* ----- MOBILE ADJUSTMENTS ----- */
+
+@media (max-width: 768px) {
+
+  .instructor-grid {
+    gap: 2.5rem;
+  }
+
+  .instructor-stats-card {
+    bottom: -1rem;
+    right: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .stats-number {
+    font-size: 1.3rem;
+  }
+
+  .stats-label {
+    font-size: 0.75rem;
+  }
+}
