@@ -823,33 +823,69 @@ a {
 /* ============================================
    WHAT IS SECTION
    ============================================ */
+
 .what-is-section {
   padding: 6rem 1.5rem;
-  background: hsla(32, 28%, 90%, 0.5);
-  position: relative;
-}
-
-@media (min-width: 768px) {
-  .what-is-section { padding: 8rem 2.5rem; }
-}
-
-@media (min-width: 1024px) {
-  .what-is-section { padding: 10rem 4rem; }
-}
-
-.what-is-card {
-  background: var(--background);
-  border-radius: 1.5rem;
-  padding: 2.5rem;
-  box-shadow: var(--shadow-elevated);
-  border: 1px solid hsla(32, 22%, 88%, 0.3);
+  background: linear-gradient(
+    to bottom,
+    hsla(32, 28%, 88%, 0.9),
+    hsla(32, 28%, 92%, 0.6)
+  );
   position: relative;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
-  .what-is-card { padding: 3.5rem; }
+  .what-is-section {
+    padding: 8rem 2.5rem;
+  }
 }
+
+@media (min-width: 1024px) {
+  .what-is-section {
+    padding: 10rem 4rem;
+  }
+}
+
+/* Fondo glow decorativo */
+
+.what-is-section::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    hsla(348, 35%, 42%, 0.08),
+    transparent 70%
+  );
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* ============================================
+   CARD CONTAINER
+   ============================================ */
+
+.what-is-card {
+  background: var(--background);
+  border-radius: 1.75rem;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid hsla(32, 22%, 88%, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .what-is-card {
+    padding: 3.5rem;
+  }
+}
+
+/* Accent corner */
 
 .card-accent-corner {
   position: absolute;
@@ -861,9 +897,42 @@ a {
   opacity: 0.3;
 }
 
+/* ============================================
+   TITLE + UNDERLINE
+   ============================================ */
+
+.what-is-title {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title-underline {
+  display: block;
+  width: 0;
+  height: 3px;
+  margin: 1rem auto 0;
+  background: linear-gradient(to right, var(--rose), var(--gold));
+  border-radius: 4px;
+  animation: underlineGrow 1.2s ease forwards;
+}
+
+@keyframes underlineGrow {
+  to {
+    width: 120px;
+  }
+}
+
+/* ============================================
+   INTRO TEXT
+   ============================================ */
+
 .what-is-intro {
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 500;
   color: var(--foreground);
   line-height: 1.7;
   margin-bottom: 3rem;
@@ -876,8 +945,14 @@ a {
 }
 
 @media (min-width: 768px) {
-  .what-is-intro { font-size: 1.5rem; }
+  .what-is-intro {
+    font-size: 1.65rem;
+  }
 }
+
+/* ============================================
+   GRID
+   ============================================ */
 
 .pillars-grid {
   display: grid;
@@ -885,35 +960,46 @@ a {
 }
 
 @media (min-width: 768px) {
-  .pillars-grid { grid-template-columns: repeat(3, 1fr); }
+  .pillars-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
+/* ============================================
+   PILLAR CARD
+   ============================================ */
 
 .pillar-card {
-  text-align: center;
-  padding: 2rem;
-  border-radius: 1rem;
-  background: hsla(38, 28%, 94%, 0.5);
-  border: 1px solid hsla(32, 22%, 88%, 0.3);
-  transition: all 0.5s ease;
+  text-align: left;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.8s ease;
+  position: relative;
+  overflow: hidden;
 }
+
 
 .pillar-card:hover {
-  box-shadow: var(--shadow-soft);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-.pillar-espresso:hover { border-color: hsla(18, 35%, 15%, 0.2); }
-.pillar-rose:hover { border-color: hsla(348, 35%, 42%, 0.2); }
-.pillar-gold:hover { border-color: hsla(40, 55%, 48%, 0.2); }
+/* ============================================
+   ICON
+   ============================================ */
 
 .pillar-icon {
   width: 4rem;
   height: 4rem;
-  margin: 0 auto 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.4s ease;
 }
 
 .pillar-icon svg {
@@ -921,37 +1007,257 @@ a {
   height: 2rem;
 }
 
+/* Espresso */
 .pillar-icon-espresso {
   background: hsla(18, 35%, 15%, 0.1);
 }
-.pillar-icon-espresso svg { color: var(--espresso); }
-.pillar-espresso:hover .pillar-icon-espresso { background: hsla(18, 35%, 15%, 0.15); }
+.pillar-icon-espresso svg {
+  color: var(--espresso);
+}
+.pillar-espresso:hover .pillar-icon-espresso {
+  background: hsla(18, 35%, 15%, 0.15);
+}
 
+/* Rose */
 .pillar-icon-rose {
   background: hsla(348, 35%, 42%, 0.1);
 }
-.pillar-icon-rose svg { color: var(--rose); }
-.pillar-rose:hover .pillar-icon-rose { background: hsla(348, 35%, 42%, 0.15); }
+.pillar-icon-rose svg {
+  color: var(--rose);
+}
+.pillar-rose:hover .pillar-icon-rose {
+  background: hsla(348, 35%, 42%, 0.15);
+}
 
+/* Gold */
 .pillar-icon-gold {
   background: hsla(40, 55%, 48%, 0.1);
 }
-.pillar-icon-gold svg { color: var(--gold); }
-.pillar-gold:hover .pillar-icon-gold { background: hsla(40, 55%, 48%, 0.15); }
+.pillar-icon-gold svg {
+  color: var(--gold);
+}
+.pillar-gold:hover .pillar-icon-gold {
+  background: hsla(40, 55%, 48%, 0.15);
+}
+
+/* ============================================
+   TEXT CONTENT
+   ============================================ */
 
 .pillar-title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
   color: var(--foreground);
 }
 
 .pillar-description {
   font-family: var(--font-body);
   color: var(--muted-foreground);
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1rem;
 }
+
+
+/* ============================================
+   CONTROL CORE LOGO - ESPRESSO GLOW SUAVE
+   ============================================ */
+
+.controlcore-logo-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+@media (max-width: 1023px) {
+  .controlcore-logo-wrapper {
+    justify-content: center;
+  }
+}
+
+.controlcore-logo {
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 3;
+
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+/* Halo elegante más sutil */
+
+.controlcore-logo-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    hsla(18, 35%, 15%, 0.45) 0%,
+    hsla(18, 35%, 15%, 0.25) 30%,
+    hsla(20, 30%, 25%, 0.15) 50%,
+    transparent 75%
+  );
+
+  filter: blur(70px);
+  z-index: 1;
+
+  animation: haloPulse 4s ease-in-out infinite;
+}
+
+/* Glow mucho más controlado */
+
+@keyframes logoGlow {
+  0% {
+    filter:
+      drop-shadow(0 0 8px hsla(18, 35%, 15%, 0.4))
+      drop-shadow(0 0 18px hsla(20, 30%, 25%, 0.25));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 16px hsla(18, 35%, 15%, 0.55))
+      drop-shadow(0 0 28px hsla(20, 30%, 25%, 0.35));
+  }
+  100% {
+    filter:
+      drop-shadow(0 0 8px hsla(18, 35%, 15%, 0.4))
+      drop-shadow(0 0 18px hsla(20, 30%, 25%, 0.25));
+  }
+}
+
+/* Respiración mínima */
+
+@keyframes haloPulse {
+  0% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  100% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+}
+
+/* En móvil mantenemos visible pero no dramático */
+
+@media (max-width: 768px) {
+  .controlcore-logo-wrapper::before {
+    filter: blur(80px);
+  }
+}
+
+/* ============================================
+   TESTIMONIAL VIDEO SECTION
+   ============================================ */
+
+.testimonial-video-section {
+  padding: 6rem 1.5rem;
+  background: var(--cream);
+  position: relative;
+}
+
+.testimonial-container {
+  max-width: 720px; /* igual que hero */
+  margin: 0 auto;
+  text-align: center;
+}
+
+.testimonial-header {
+  margin-bottom: 2rem;
+}
+
+.testimonial-tag {
+  display: inline-block;
+  background: var(--rose-muted);
+  color: var(--rose);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+.testimonial-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--espresso);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.testimonial-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  margin-bottom: 2.5rem;
+}
+
+/* Ajuste para vertical */
+.testimonial-video-wrapper {
+  width: 320px; /* tamaño vertical tipo reel */
+  aspect-ratio: 9 / 16;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.25);
+  animation: heroFadeUp 1s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.testimonial-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botón de sonido igual hero */
+.testimonial-video-wrapper .video-sound-toggle {
+  bottom: 0.8rem;
+  right: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .testimonial-video-wrapper {
+    width: 85%;
+    max-width: 300px;
+  }
+}
+
+.testimonial-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: subtleZoom 12s ease-in-out infinite alternate;
+}
+
+@keyframes subtleZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.04);
+  }
+}
+
 
 /* ============================================
    MATCH LIPS SECTION
@@ -1092,7 +1398,6 @@ a {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2.5rem;
@@ -1119,11 +1424,14 @@ a {
 
 .visual-quote {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
   font-style: italic;
   color: var(--espresso);
-  line-height: 1.4;
+  line-height: 1.3;
+  text-align: center;
+  max-width: 85%;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
@@ -1150,6 +1458,42 @@ a {
   border: 1px solid var(--beige-dark);
   border-radius: 1.5rem;
   z-index: -1;
+}
+
+/* ============================================
+   MATCH LIPS FULL IMAGE VERSION
+   ============================================ */
+
+.image-card {
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: heroFadeUp 1s ease-out forwards;
+}
+
+.visual-full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Overlay suave para mantener estética */
+.image-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.05)
+  );
+  pointer-events: none;
+}
+
+/* Micro zoom elegante */
+.image-card:hover .visual-full-image {
+  transform: scale(1.05);
 }
 
 /* ============================================
@@ -1312,49 +1656,6 @@ a {
   background: hsla(348, 35%, 42%, 0.1);
   border-radius: 50%;
   filter: blur(24px);
-}
-
-.instructor-stats-card {
-  position: absolute;
-  bottom: -1rem;
-  left: -1rem;
-  background: var(--background);
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: var(--shadow-elevated);
-  border: 1px solid hsla(32, 22%, 88%, 0.5);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.stats-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: hsla(40, 55%, 48%, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stats-icon svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--gold);
-}
-
-.stats-number {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.875rem;
-  color: var(--foreground);
-}
-
-.stats-label {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--muted-foreground);
 }
 
 /* ============================================
