@@ -2108,6 +2108,7 @@ a {
   color: var(--cream-dark);
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -2157,52 +2158,103 @@ a {
   background-size: 40px 40px;
 }
 
+/* ── Contenedor centrado ── */
+.final-cta-section .container-narrow {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ── Título ── */
 .final-cta-title {
   font-family: var(--font-display);
-  font-size: 2.25rem;
+  font-size: 3.8rem;
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 2.5rem;
+  line-height: 1.15;
+  margin-bottom: 2rem;
   letter-spacing: -0.025em;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
-  .final-cta-title { font-size: 3rem; }
-}
-
-@media (min-width: 1024px) {
-  .final-cta-title { font-size: 3.75rem; }
-}
-
-@media (min-width: 1280px) {
   .final-cta-title { font-size: 4.5rem; }
 }
 
-.final-cta-title-accent {
-  display: block;
-  margin-top: 0.5rem;
-  font-style: italic;
-  font-weight: 500;
-  opacity: 0.9;
+@media (min-width: 1024px) {
+  .final-cta-title { font-size: 5.5rem; }
 }
 
+@media (min-width: 1280px) {
+  .final-cta-title { font-size: 6rem; }
+}
+
+/* ── Primera línea ── */
+.final-cta-title-line {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: var(--cream-dark);
+  -webkit-text-fill-color: var(--cream-dark);
+}
+
+/* ── "Se entiende." en gradiente dorado ── */
+.final-cta-title-accent {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.25em;
+  font-style: italic;
+  font-weight: 500;
+  background: linear-gradient(
+    135deg,
+    hsla(42, 70%, 85%, 1) 0%,
+    hsla(40, 60%, 68%, 1) 40%,
+    hsla(348, 35%, 72%, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: accentShimmer 4s ease-in-out infinite;
+}
+
+@keyframes accentShimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Subtítulo ── */
 .final-cta-subtitle {
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--cream-dark);
   opacity: 0.75;
-  max-width: 42rem;
-  margin: 0 auto 3.5rem;
-  line-height: 1.7;
+  max-width: 30rem;
+  margin: 0 auto 3rem;
+  line-height: 1.75;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
-  .final-cta-subtitle { font-size: 1.5rem; }
+  .final-cta-subtitle { font-size: 1.35rem; }
 }
 
+/* ── Footer ── */
 .final-cta-footer {
-  margin-top: 5rem;
-  padding-top: 2.5rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
   border-top: 1px solid hsla(42, 35%, 98%, 0.15);
+  text-align: center;
+  width: 100%;
 }
 
 .footer-brand {
@@ -2210,6 +2262,7 @@ a {
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.05em;
+  color: hsla(42, 35%, 98%, 0.85);
 }
 
 .footer-tagline {
@@ -2588,4 +2641,61 @@ a {
   .stats-label {
     font-size: 0.75rem;
   }
+}
+
+/* ============================================
+   FINAL CTA — FONT SIZE FORCE FIX
+   Pega esto AL FINAL de tu style.css
+   (después de todo lo demás)
+   ============================================ */
+
+.final-cta-title {
+  font-size: 4.5rem !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin-bottom: 0.2rem !important;
+  padding-bottom: 0 !important;
+}
+
+.final-cta-title-line {
+  display: block !important;
+  text-align: center !important;
+  -webkit-text-fill-color: var(--cream-dark) !important;
+}
+
+.final-cta-title-accent {
+  display: block !important;
+  text-align: center !important;
+  font-size: 4.8rem !important;
+  line-height: 1.1 !important;
+}
+
+.final-cta-subtitle {
+  font-size: 1.15rem !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 0.5rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 2.5rem !important;
+  padding-top: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .final-cta-title   { font-size: 5rem !important; }
+  .final-cta-title-accent { font-size: 5.2rem !important; }
+  .final-cta-subtitle { font-size: 1.35rem !important; }
+}
+
+@media (min-width: 1024px) {
+  .final-cta-title   { font-size: 6rem !important; }
+  .final-cta-title-accent { font-size: 6.2rem !important; }
+}
+
+.final-cta-title-accent {
+  -webkit-text-fill-color: hsla(42, 70%, 75%, 1) !important;
+  color: hsla(42, 70%, 75%, 1) !important;
+  background: none !important;
+  animation: none !important;
 }
