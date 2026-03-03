@@ -634,58 +634,7 @@ if (testimonialSection) {
   const wrapper = document.querySelector('.hero-image-wrapper');
   if (!wrapper) return;
 
-  // ── 1. RINGS ORBITALES ──────────────────
-  const ring1 = document.createElement('div');
-  ring1.className = 'hero-orbit-ring';
-  const ring2 = document.createElement('div');
-  ring2.className = 'hero-orbit-ring-2';
-  wrapper.appendChild(ring1);
-  wrapper.appendChild(ring2);
-
-  // Dot en ring 1
-  const dot1 = document.createElement('div');
-  dot1.className = 'hero-orbit-dot';
-  dot1.style.cssText = `
-    position: absolute;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: hsla(40, 65%, 65%, 1);
-    box-shadow: 0 0 10px 3px hsla(40, 55%, 48%, 0.7);
-    pointer-events: none; z-index: 12;
-    top: 0; left: 50%;
-    transform-origin: 0 50%;
-    animation: orbit1 18s linear infinite;
-  `;
-  ring1.appendChild(dot1);
-
-  // Dot en ring 2
-  const dot2 = document.createElement('div');
-  dot2.style.cssText = `
-    position: absolute;
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: hsla(348, 45%, 60%, 1);
-    box-shadow: 0 0 8px 2px hsla(348, 35%, 42%, 0.6);
-    pointer-events: none; z-index: 12;
-    top: 50%; left: 100%;
-    transform-origin: 0 0;
-    animation: orbit2 28s linear infinite reverse;
-  `;
-  ring2.appendChild(dot2);
-
-  // Keyframes dots
-  const orbitStyle = document.createElement('style');
-  orbitStyle.textContent = `
-    @keyframes orbit1 {
-      from { transform: translateX(-50%) rotate(0deg) translateX(calc(var(--ring-r, 50%) + 6px)) rotate(0deg); }
-      to   { transform: translateX(-50%) rotate(360deg) translateX(calc(var(--ring-r, 50%) + 6px)) rotate(-360deg); }
-    }
-    @keyframes orbit2 {
-      from { transform: rotate(0deg) translateX(50%) rotate(0deg); }
-      to   { transform: rotate(-360deg) translateX(50%) rotate(360deg); }
-    }
-  `;
-  document.head.appendChild(orbitStyle);
+  
 
   // ── 2. GLOWS LATERALES ──────────────────
   const glowL = document.createElement('div');
@@ -716,25 +665,24 @@ if (testimonialSection) {
   sizeCanvas();
   window.addEventListener('resize', sizeCanvas);
 
-  // Colores mezclados dorado/rosa
+  // Colores acordes: dorado, espresso, beige cálido
   const COLORS = [
-    'hsla(42,70%,75%,1)',
-    'hsla(40,55%,55%,1)',
-    'hsla(348,40%,60%,1)',
-    'hsla(42,80%,85%,1)',
-    'hsla(32,50%,65%,1)',
+    'hsla(42, 70%, 75%, 1)',
+    'hsla(40, 55%, 55%, 1)',
+    'hsla(32, 50%, 65%, 1)',
+    'hsla(42, 80%, 85%, 1)',
+    'hsla(18, 35%, 35%, 1)',
   ];
 
   class HeroParticle {
     constructor() { this.init(); }
     init() {
-      // Nacer en los bordes de la imagen
       const edge = Math.floor(Math.random() * 4);
       const w = canvas.width, h = canvas.height;
-      if (edge === 0) { this.x = Math.random() * w; this.y = h; }
+      if (edge === 0)      { this.x = Math.random() * w; this.y = h; }
       else if (edge === 1) { this.x = 0; this.y = Math.random() * h; }
       else if (edge === 2) { this.x = w; this.y = Math.random() * h; }
-      else { this.x = Math.random() * w; this.y = 0; }
+      else                 { this.x = Math.random() * w; this.y = 0; }
 
       this.vx = (Math.random() - 0.5) * 0.7;
       this.vy = -(Math.random() * 0.8 + 0.3);
@@ -791,61 +739,15 @@ if (testimonialSection) {
     return p;
   });
 
-  let animating = true;
   function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => { p.update(); p.draw(); });
-    if (animating) requestAnimationFrame(loop);
+    requestAnimationFrame(loop);
   }
   loop();
 
-  // ── 4. SPARKLES TIPO ESTRELLA ─────────────
-  const sparklePositions = [
-    { top: '8%',  left: '12%',  size: 12, dur: '3.2s', delay: '0s'   },
-    { top: '15%', right: '10%', size: 9,  dur: '2.8s', delay: '0.8s' },
-    { top: '45%', left: '5%',   size: 7,  dur: '4s',   delay: '1.4s' },
-    { top: '70%', right: '8%',  size: 10, dur: '3.5s', delay: '0.4s' },
-    { top: '85%', left: '18%',  size: 8,  dur: '2.5s', delay: '2s'   },
-    { top: '30%', right: '4%',  size: 6,  dur: '3.8s', delay: '1.8s' },
-    { top: '55%', left: '2%',   size: 11, dur: '3s',   delay: '0.6s' },
-  ];
-
-  sparklePositions.forEach(pos => {
-    const el = document.createElement('div');
-    el.style.cssText = `
-      position: absolute;
-      top: ${pos.top || 'auto'};
-      bottom: ${pos.bottom || 'auto'};
-      left: ${pos.left || 'auto'};
-      right: ${pos.right || 'auto'};
-      width: ${pos.size}px;
-      height: ${pos.size}px;
-      pointer-events: none;
-      z-index: 13;
-      animation: sparkleAppear ${pos.dur} ease-in-out infinite ${pos.delay};
-    `;
-    // Cruz de 4 puntas
-    el.innerHTML = `<svg width="${pos.size * 2}" height="${pos.size * 2}" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
-      <path d="M10 1 C10 5, 10 5, 10 10 C10 5, 10 5, 10 1Z" stroke="hsla(42,70%,75%,0.9)" stroke-width="1.5" fill="hsla(42,70%,75%,0.6)"/>
-      <path d="M1 10 C5 10, 5 10, 10 10 C5 10, 5 10, 1 10Z" stroke="hsla(42,70%,75%,0.9)" stroke-width="1.5" fill="hsla(42,70%,75%,0.6)"/>
-      <path d="M10 10 C10 15, 10 15, 10 19Z" stroke="hsla(42,70%,75%,0.9)" stroke-width="1.5" fill="hsla(42,70%,75%,0.6)"/>
-      <path d="M10 10 C15 10, 15 10, 19 10Z" stroke="hsla(42,70%,75%,0.9)" stroke-width="1.5" fill="hsla(42,70%,75%,0.6)"/>
-      <circle cx="10" cy="10" r="2" fill="hsla(42,80%,85%,1)"/>
-    </svg>`;
-    wrapper.appendChild(el);
-  });
-
-  const sparkleStyle = document.createElement('style');
-  sparkleStyle.textContent = `
-    @keyframes sparkleAppear {
-      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-      25%       { opacity: 1; transform: scale(1) rotate(45deg); }
-      75%       { opacity: 0.8; transform: scale(0.7) rotate(90deg); }
-    }
-  `;
-  document.head.appendChild(sparkleStyle);
-
 })();
+
 
 /* ============================================
      MATCH LIPS CAROUSEL

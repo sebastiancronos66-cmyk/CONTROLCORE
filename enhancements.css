@@ -860,144 +860,14 @@ div[style*="position: fixed"][style*="height: 2px"] {
 }
 
 /* ============================================
-   HERO IMAGE — EFFECTS PREMIUM
-   Pega al final de enhancements.css
+   HERO IMAGE — EFFECTS PREMIUM v2
    ============================================ */
 
-/* ── Wrapper posicionado ── */
 .hero-image-wrapper {
   position: relative;
   isolation: isolate;
 }
 
-/* ── Halo exterior respirando ── */
-.hero-image-wrapper::after {
-  content: "";
-  position: absolute;
-  inset: -8%;
-  border-radius: 50% 44% 56% 46% / 48% 52% 44% 56%;
-  background: radial-gradient(
-    ellipse at 50% 60%,
-    hsla(40, 55%, 48%, 0.22) 0%,
-    hsla(348, 35%, 42%, 0.14) 40%,
-    transparent 70%
-  );
-  filter: blur(18px);
-  z-index: -1;
-  animation: heroHaloPulse 5s ease-in-out infinite;
-}
-
-@keyframes heroHaloPulse {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.06) rotate(2deg);
-    opacity: 1;
-  }
-}
-
-/* ── Canvas de partículas montado sobre la imagen ── */
-.hero-particle-canvas {
-  position: absolute;
-  inset: -15%;
-  width: 130%;
-  height: 130%;
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* ── Destellos tipo "bokeh" fijos animados ── */
-.hero-sparkle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 11;
-  animation: sparklePop var(--dur) ease-in-out infinite var(--delay);
-}
-
-@keyframes sparklePop {
-  0%, 100% {
-    transform: scale(0) rotate(0deg);
-    opacity: 0;
-  }
-  20% {
-    transform: scale(1) rotate(45deg);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(0.8) rotate(90deg);
-    opacity: 0.7;
-  }
-}
-
-/* Forma de estrella de 4 puntas */
-.hero-sparkle::before,
-.hero-sparkle::after {
-  content: "";
-  position: absolute;
-  background: inherit;
-  border-radius: 50%;
-}
-
-.hero-sparkle::before {
-  inset: 20% 0;
-}
-.hero-sparkle::after {
-  inset: 0 20%;
-}
-
-/* ── Ring orbital ── */
-.hero-orbit-ring {
-  position: absolute;
-  inset: -5%;
-  border-radius: 50% 44% 56% 46% / 48% 52% 44% 56%;
-  border: 1px solid hsla(40, 55%, 48%, 0.2);
-  pointer-events: none;
-  z-index: 9;
-  animation: orbitSpin 18s linear infinite;
-}
-
-.hero-orbit-ring-2 {
-  position: absolute;
-  inset: -10%;
-  border-radius: 46% 54% 44% 56% / 52% 46% 54% 48%;
-  border: 1px dashed hsla(348, 35%, 42%, 0.12);
-  pointer-events: none;
-  z-index: 9;
-  animation: orbitSpin 28s linear infinite reverse;
-}
-
-@keyframes orbitSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* ── Dot que viaja en el ring ── */
-.hero-orbit-dot {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: hsla(40, 65%, 60%, 0.9);
-  top: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 8px hsla(40, 55%, 48%, 0.8);
-  animation: orbitSpin 18s linear infinite;
-  transform-origin: calc(50% + var(--r, 50px)) 50%;
-}
-
-.hero-orbit-dot-2 {
-  background: hsla(348, 35%, 55%, 0.9);
-  box-shadow: 0 0 8px hsla(348, 35%, 42%, 0.7);
-  animation: orbitSpin 28s linear infinite reverse;
-  width: 4px;
-  height: 4px;
-}
-
-/* ── Glow line izquierda y derecha ── */
 .hero-image-wrapper .hero-side-glow-l,
 .hero-image-wrapper .hero-side-glow-r {
   position: absolute;
@@ -1012,19 +882,29 @@ div[style*="position: fixed"][style*="height: 2px"] {
 
 .hero-side-glow-l {
   left: -4px;
-  background: linear-gradient(to bottom, transparent, hsla(40, 55%, 48%, 0.6), transparent);
+  background: linear-gradient(to bottom, transparent, hsla(40, 55%, 48%, 0.5), transparent);
 }
 
 .hero-side-glow-r {
   right: -4px;
-  background: linear-gradient(to bottom, transparent, hsla(348, 35%, 42%, 0.5), transparent);
+  background: linear-gradient(to bottom, transparent, hsla(18, 35%, 15%, 0.3), transparent);
   animation-delay: 1s;
 }
 
 @keyframes sideGlowPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
-  50%       { opacity: 1;   transform: scaleY(1.1); }
+  0%, 100% { opacity: 0.35; transform: scaleY(0.8); }
+  50%       { opacity: 0.9;  transform: scaleY(1.1); }
 }
+
+.hero-particle-canvas {
+  position: absolute;
+  inset: -15%;
+  width: 130%;
+  height: 130%;
+  pointer-events: none;
+  z-index: 10;
+}
+
 
 /* ============================================
    MATCH LIPS — CAROUSEL
